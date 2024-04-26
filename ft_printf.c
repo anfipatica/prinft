@@ -76,7 +76,7 @@ int	ft_printf(char const *str, ...)
 		{
 			printed_chars += ft_checkarg(str[++i], vargs);
 		}
-		else if (str[i + 1] != '\0')
+		else
 			printed_chars += ft_putchar(str[i]);
 		i++;
 	}

@@ -1,25 +1,33 @@
-NAME = libftprintf.a
+NAME = ft_printf.a
 
-CC = cc
+RM = rm -f 
+
+CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
+
+OBJS_DIR = ./obj
 
 SRCS = ft_printf.c \
 		printf_numbers.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:%.c=obj/%.o)
 
-RM = rm -f 
+.PHONY: clean all fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): objs $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-$(OBJS): $(SRCS)
+objs:
+	mkdir -p $(OBJS_DIR)
+
+$(OBJS_DIR)/%.o: %.c
+	$(CC) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
